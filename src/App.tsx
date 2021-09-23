@@ -2,7 +2,7 @@ import { fetchUsers, filterUsers } from "App.code";
 import { Spinner } from "components/spinner";
 import { UserInfo } from "components/user-info";
 import { User } from "models/user";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "styles/pages/App.scss";
 
 function App() {
@@ -10,6 +10,7 @@ function App() {
   const [users, setUsers] = useState<User[]>([]);
   const [displayedUsers, setDisplayedUsers] = useState<User[]>([]);
   const [error, setError] = useState<Error | null>(null);
+  const inputRef = useRef<any>(null);
 
   useEffect(() => {
     fetchUsers(setUsers, setDisplayedUsers, setError);
@@ -19,6 +20,10 @@ function App() {
     filterUsers(searchTerm, users, setDisplayedUsers);
   }, [searchTerm]);
 
+  useEffect(() => {
+    inputRef.current.focus();
+  }, [users]);
+
   const usersList = displayedUsers.map((user) => <UserInfo key={user.id} user={user} />);
   const content = users.length > 0 ? <ul className="App__user-list">{usersList}</ul> : <Spinner />;
 
@@ -27,12 +32,15 @@ function App() {
       <div className="App__content">
         <h1 className="App__header">Users list</h1>
         <input
+          ref={inputRef}
+          disabled={users.length === 0}
+          name="search-input"
           className="base-input"
           value={searchTerm}
           onChange={(e) => {
             setSearchTerm(e.target.value);
           }}
-          placeholder="Search by user name..."
+          placeholder="Search by user's name..."
         />
         {error === null && content}
         {displayedUsers.length === 0 && users.length > 0 && error === null && (

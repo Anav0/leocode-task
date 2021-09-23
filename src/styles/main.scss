@@ -31,3 +31,7 @@ html {
   color: $fg-secondary;
   width: 100%;
 }
+
+.base-input:focus{
+  border-color: $accent
+}
