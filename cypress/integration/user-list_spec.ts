@@ -37,6 +37,13 @@ describe("Fetching", () => {
     cy.wait(["@getUsers"]);
     cy.get("[data-cy=error]").should("be.visible");
   });
+
+  it("Fetching fake users works", () => {
+    cy.intercept("GET", "/users*").as("getUsers");
+    cy.visit("/");
+    cy.wait(["@getUsers"]);
+    cy.get("[data-cy=users-list]").children().should("have.length", 10);
+  });
 });
 
 describe("Users list", () => {
