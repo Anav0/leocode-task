@@ -1,9 +1,8 @@
-import { fetchUsers, filterUsers } from "App.code";
+import { fetchUsers, filterUsers } from "pages/App.code";
 import { Spinner } from "components/spinner";
 import { UserInfo } from "components/user-info";
 import { User } from "models/user";
 import React, { useEffect, useRef, useState } from "react";
-import "styles/pages/App.scss";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -24,7 +23,7 @@ function App() {
     inputRef.current.focus();
   }, [users]);
 
-  const usersList = displayedUsers.map((user) => <UserInfo key={user.id} user={user} />);
+  const usersList = displayedUsers.map((user: User) => <UserInfo key={user.id} user={user} />);
   const content =
     users.length > 0 ? (
       <ul data-cy="users-list" className="App__user-list">

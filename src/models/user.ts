@@ -1,3 +1,5 @@
+// INFO: I've ommited unused fields
+
 export class User {
     id: string
     name: string

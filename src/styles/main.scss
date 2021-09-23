@@ -1,6 +1,8 @@
 @import "colors";
 @import "fonts";
 @import "breakpoints";
+@import "styles/components/all";
+@import "styles/pages/all";
 
 * {
   font-family: "Noto Sans", sans-serif;
@@ -32,6 +34,6 @@ html {
   width: 100%;
 }
 
-.base-input:focus{
-  border-color: $accent
+.base-input:focus {
+  border-color: $accent;
 }

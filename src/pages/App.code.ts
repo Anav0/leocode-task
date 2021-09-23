@@ -3,11 +3,13 @@ import { User } from "models/user";
 
 export const filterUsers = (searchTerm: string, users: User[], setFilteredUsers: any) => {
     const normalizedSearchTerm = searchTerm.trim().toLowerCase();
+
     if (normalizedSearchTerm === "") {
         setFilteredUsers(users)
         return
     }
 
+    //INFO: using some fuzzy search may be a good idea
     const filteredUsers = users.filter((user) => {
         return (
             user.name.toLowerCase().includes(normalizedSearchTerm) ||

@@ -1,5 +1,4 @@
 import { User } from "models/user";
-import "styles/components/user-info.scss";
 
 type UserInfoProps = {
   user: User;
