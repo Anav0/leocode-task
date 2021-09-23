@@ -2,7 +2,7 @@ import "styles/components/spinner.scss";
 
 export function Spinner() {
   return (
-    <div className="spinner">
+    <div data-cy="spinner" className="spinner">
       <div></div>
       <div></div>
     </div>

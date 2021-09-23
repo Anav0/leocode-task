@@ -25,13 +25,21 @@ function App() {
   }, [users]);
 
   const usersList = displayedUsers.map((user) => <UserInfo key={user.id} user={user} />);
-  const content = users.length > 0 ? <ul className="App__user-list">{usersList}</ul> : <Spinner />;
+  const content =
+    users.length > 0 ? (
+      <ul data-cy="users-list" className="App__user-list">
+        {usersList}
+      </ul>
+    ) : (
+      <Spinner />
+    );
 
   return (
     <div className="App">
       <div className="App__content">
         <h1 className="App__header">Users list</h1>
         <input
+          data-cy="searchBox"
           ref={inputRef}
           disabled={users.length === 0}
           name="search-input"
@@ -44,9 +52,15 @@ function App() {
         />
         {error === null && content}
         {displayedUsers.length === 0 && users.length > 0 && error === null && (
-          <span className="App__info">No user with given name was found</span>
+          <span data-cy="info" className="App__info">
+            No user with given name was found
+          </span>
         )}
-        {error != null && <span className="App__error">{error.message}</span>}
+        {error != null && (
+          <span data-cy="error" className="App__error">
+            {error.message}
+          </span>
+        )}
       </div>
     </div>
   );
