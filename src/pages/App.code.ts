@@ -9,7 +9,7 @@ export const filterUsers = (searchTerm: string, users: User[], setFilteredUsers:
         return
     }
 
-    //INFO: using some fuzzy search may be a good idea
+    // INFO: using some fuzzy search may be a good idea
     const filteredUsers = users.filter((user) => {
         return (
             user.name.toLowerCase().includes(normalizedSearchTerm) ||
@@ -20,6 +20,8 @@ export const filterUsers = (searchTerm: string, users: User[], setFilteredUsers:
 };
 
 export const fetchUsers = async (setUsers: any, setDisplayedUsers: any, setError: any) => {
+    // INFO: this timeout is here only to showcase how would application behave on slow connection
+    // Another way of simulating slow connection is browser dev tools
     setTimeout(async () => {
         try {
             const { data: users } = await api.users.all();
@@ -28,5 +30,5 @@ export const fetchUsers = async (setUsers: any, setDisplayedUsers: any, setError
         } catch (error) {
             setError(error)
         }
-    }, 2000);
+    }, 1000);
 };
