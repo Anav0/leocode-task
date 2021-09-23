@@ -23,15 +23,25 @@ function App() {
     inputRef.current.focus();
   }, [users]);
 
-  const usersList = displayedUsers.map((user: User) => <UserInfo key={user.id} user={user} />);
-  const content =
-    users.length > 0 ? (
-      <ul data-cy="users-list" className="App__user-list">
-        {usersList}
-      </ul>
-    ) : (
-      <Spinner />
-    );
+  const usersInfo = displayedUsers.map((user: User) => <UserInfo key={user.id} user={user} />);
+
+  const usersList = (
+    <ul data-cy="users-list" className="App__user-list">
+      {usersInfo}
+    </ul>
+  );
+
+  const errorTag = (
+    <span data-cy="error" className="App__error">
+      {error?.message}
+    </span>
+  );
+
+  const infoTag = (
+    <span data-cy="info" className="App__info">
+      No user with given name was found
+    </span>
+  );
 
   return (
     <div className="App">
@@ -49,17 +59,10 @@ function App() {
           }}
           placeholder="Search by user's name..."
         />
-        {error === null && content}
-        {displayedUsers.length === 0 && users.length > 0 && error === null && (
-          <span data-cy="info" className="App__info">
-            No user with given name was found
-          </span>
-        )}
-        {error != null && (
-          <span data-cy="error" className="App__error">
-            {error.message}
-          </span>
-        )}
+        {error === null && users.length > 0 && usersList}
+        {error != null && errorTag}
+        {users.length === 0 && error === null && <Spinner />}
+        {displayedUsers.length === 0 && users.length > 0 && error === null && infoTag}
       </div>
     </div>
   );
