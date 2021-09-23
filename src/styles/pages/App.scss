@@ -1,5 +1,8 @@
+@import "styles/colors";
+@import "styles/breakpoints";
+
 .App {
-  padding: 2rem;
+  padding: 1rem;
   width: 100%;
   height: 100%;
 
@@ -18,5 +21,21 @@
   &__header {
     font-size: 3rem;
     font-weight: 700;
+  }
+
+  &__user-list {
+    counter-reset: user-counter;
+  }
+
+  &__header,
+  .base-input {
+    margin-bottom: 3rem;
+  }
+
+  &__user-list li:before {
+    content: counter(user-counter) ".";
+    counter-increment: user-counter;
+    color: $fg-secondary;
+    margin-right: 0.5rem;
   }
 }

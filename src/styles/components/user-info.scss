@@ -1,0 +1,14 @@
+@import "styles/colors";
+
+.user-info {
+  display: flex;
+  margin-bottom: 1rem;
+
+  &__name {
+    margin-right: 1rem;
+    font-weight: 700;
+  }
+  &__username {
+    color: $fg-secondary;
+  }
+}
