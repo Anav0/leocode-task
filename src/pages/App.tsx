@@ -17,7 +17,7 @@ function App() {
 
   useEffect(() => {
     filterUsers(searchTerm, users, setDisplayedUsers);
-  }, [searchTerm]);
+  }, [searchTerm, users]);
 
   useEffect(() => {
     inputRef.current.focus();
