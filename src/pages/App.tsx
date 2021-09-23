@@ -7,23 +7,23 @@ import React, { useEffect, useRef, useState } from "react";
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [users, setUsers] = useState<User[]>([]);
-  const [displayedUsers, setDisplayedUsers] = useState<User[]>([]);
+  const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
   const [error, setError] = useState<Error | null>(null);
   const inputRef = useRef<any>(null);
 
   useEffect(() => {
-    fetchUsers(setUsers, setDisplayedUsers, setError);
+    fetchUsers(setUsers, setFilteredUsers, setError);
   }, []);
 
   useEffect(() => {
-    filterUsers(searchTerm, users, setDisplayedUsers);
+    filterUsers(searchTerm, users, setFilteredUsers);
   }, [searchTerm, users]);
 
   useEffect(() => {
     inputRef.current.focus();
   }, [users]);
 
-  const usersInfo = displayedUsers.map((user: User) => <UserInfo key={user.id} user={user} />);
+  const usersInfo = filteredUsers.map((user: User) => <UserInfo key={user.id} user={user} />);
 
   const usersList = (
     <ul data-cy="users-list" className="App__user-list">
@@ -62,7 +62,7 @@ function App() {
         {error === null && users.length > 0 && usersList}
         {error != null && errorTag}
         {users.length === 0 && error === null && <Spinner />}
-        {displayedUsers.length === 0 && users.length > 0 && error === null && infoTag}
+        {filteredUsers.length === 0 && users.length > 0 && error === null && infoTag}
       </div>
     </div>
   );
