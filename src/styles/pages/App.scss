@@ -2,7 +2,7 @@
 @import "styles/breakpoints";
 
 .App {
-  padding: 1rem;
+  padding: 4rem;
   width: 100%;
   height: 100%;
 
@@ -14,13 +14,27 @@
   &__content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    height: 768px;
+
+    @include md {
+      width: 60%;
+    }
+
+    @include xl {
+      width: 45%;
+    }
+    @include ul {
+      width: 25%;
+    }
   }
 
   &__header {
     font-size: 3rem;
     font-weight: 700;
+    place-self: center;
   }
 
   &__user-list {
@@ -37,5 +51,9 @@
     counter-increment: user-counter;
     color: $fg-secondary;
     margin-right: 0.5rem;
+  }
+
+  &__info {
+    font-weight: 700;
   }
 }
