@@ -1,0 +1,22 @@
+.App {
+  padding: 2rem;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__header {
+    font-size: 3rem;
+    font-weight: 700;
+  }
+}
