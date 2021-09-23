@@ -53,7 +53,12 @@
     margin-right: 0.5rem;
   }
 
-  &__info {
+  &__info,
+  &__error {
     font-weight: 700;
+  }
+
+  &__error {
+    color: $fg-alert;
   }
 }

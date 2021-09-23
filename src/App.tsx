@@ -1,4 +1,4 @@
-import api from "api";
+import { fetchUsers, filterUsers } from "App.code";
 import { Spinner } from "components/spinner";
 import { UserInfo } from "components/user-info";
 import { User } from "models/user";
@@ -9,44 +9,17 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [users, setUsers] = useState<User[]>([]);
   const [displayedUsers, setDisplayedUsers] = useState<User[]>([]);
+  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        setTimeout(async () => {
-          const { data: users } = await api.users.all();
-          setUsers(users);
-          setDisplayedUsers(users);
-        }, 2000);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchUsers();
+    fetchUsers(setUsers, setDisplayedUsers, setError);
   }, []);
 
-  const filterUsers = () => {
-    const normalizedSearchTerm = searchTerm.trim().toLowerCase();
-    if (normalizedSearchTerm === "") {
-      setDisplayedUsers(users);
-      return;
-    }
-
-    const filteredUsers = users.filter((user) => {
-      return (
-        user.name.toLowerCase().includes(normalizedSearchTerm) ||
-        user.username.toLowerCase().includes(normalizedSearchTerm)
-      );
-    });
-    setDisplayedUsers(filteredUsers);
-  };
-
   useEffect(() => {
-    filterUsers();
+    filterUsers(searchTerm, users, setDisplayedUsers);
   }, [searchTerm]);
 
   const usersList = displayedUsers.map((user) => <UserInfo key={user.id} user={user} />);
-
   const content = users.length > 0 ? <ul className="App__user-list">{usersList}</ul> : <Spinner />;
 
   return (
@@ -61,10 +34,11 @@ function App() {
           }}
           placeholder="Search by user name..."
         />
-        {content}
-        {displayedUsers.length === 0 && users.length > 0 && (
+        {error === null && content}
+        {displayedUsers.length === 0 && users.length > 0 && error === null && (
           <span className="App__info">No user with given name was found</span>
         )}
+        {error != null && <span className="App__error">{error.message}</span>}
       </div>
     </div>
   );
