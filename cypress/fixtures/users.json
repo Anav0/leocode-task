@@ -1,0 +1,22 @@
+[
+  {
+    "id": "1",
+    "name": "Jacek Placek",
+    "username": "placek00"
+  },
+  {
+    "id": "2",
+    "name": "Jacek Plackowski",
+    "username": "placek01"
+  },
+  {
+    "id": "3",
+    "name": "Tomek Klocek",
+    "username": "klocek00"
+  },
+  {
+    "id": "4",
+    "name": "Tomek Klockowiski",
+    "username": "klocek01"
+  }
+]
