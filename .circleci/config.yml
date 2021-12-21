@@ -20,6 +20,8 @@ jobs:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
-      - run:
-          name: Run cypress
-          command: cypress/run
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - cypress/run
