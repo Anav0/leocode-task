@@ -6,6 +6,5 @@ workflows:
     jobs:
       - cypress/run:
          build: "npm run build"
-         record: true
          parallel: true
          parallelism: 8
