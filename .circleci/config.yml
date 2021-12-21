@@ -7,3 +7,7 @@ workflows:
       - cypress/run:
           start: npm start
           wait-on: 'http://localhost:3000'
+      - build:
+          start: npm run build
+      - store_build:
+          path: /public/build
