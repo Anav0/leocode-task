@@ -1,6 +1,6 @@
 {
-  "short_name": "Leocode test",
-  "name": "Leocode recruitment task",
+  "short_name": "React App",
+  "name": "Create React App Sample",
   "icons": [
     {
       "src": "favicon.ico",

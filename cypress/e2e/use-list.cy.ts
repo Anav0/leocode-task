@@ -3,18 +3,18 @@ import users from "../fixtures/users.json";
 describe("Search box", () => {
   it("Is disabled while fetching users", () => {
     cy.intercept("GET", "/users*", { fixture: "users" }).as("getUsers");
-    cy.visit("/");
+    cy.visit("localhost:3000/");
     cy.get("[data-cy=searchBox]").should("be.disabled");
   });
 
   it("Have a placeholder", () => {
-    cy.visit("/");
+    cy.visit("localhost:3000/");
     cy.get("[data-cy=searchBox]").should("have.attr", "placeholder");
   });
 
   it("Is focused after fetching", () => {
     cy.intercept("GET", "/users*", { fixture: "users" }).as("getUsers");
-    cy.visit("/");
+    cy.visit("localhost:3000/");
     cy.wait(["@getUsers"]);
     cy.get("[data-cy=searchBox]").should("be.focused");
   });
@@ -23,7 +23,7 @@ describe("Search box", () => {
 describe("Fetching", () => {
   it("Spinner is shown while fetching", () => {
     cy.intercept("GET", "/users*", { fixture: "users" }).as("getUsers");
-    cy.visit("/");
+    cy.visit("localhost:3000/");
     cy.get("[data-cy=spinner]").should("be.visible");
     cy.get("[data-cy=users-list]").should("not.exist");
     cy.wait(["@getUsers"]);
@@ -33,14 +33,14 @@ describe("Fetching", () => {
 
   it("Error is shown when fetching fails", () => {
     cy.intercept("GET", "/users*", { forceNetworkError: true }).as("getUsers");
-    cy.visit("/");
+    cy.visit("localhost:3000/");
     cy.wait(["@getUsers"]);
     cy.get("[data-cy=error]").should("be.visible");
   });
 
   it("Fetching fake users works", () => {
     cy.intercept("GET", "/users*").as("getUsers");
-    cy.visit("/");
+    cy.visit("localhost:3000/");
     cy.wait(["@getUsers"]);
     cy.get("[data-cy=users-list]").children().should("have.length", 10);
   });
@@ -49,7 +49,7 @@ describe("Fetching", () => {
 describe("Users list", () => {
   beforeEach(() => {
     cy.intercept("GET", "/users*", { fixture: "users" }).as("getUsers");
-    cy.visit("/");
+    cy.visit("localhost:3000/");
     cy.wait(["@getUsers"]);
   });
 
